@@ -1,0 +1,19 @@
+
+Filenames of csv files includes the date and time the opp finder script first started running.
+
+Fields in the spread sheet.
+
+timestamp: ISO 8601 format in UTC time. YYYY-MM-DDTHH:MM:SS normally
+market_1: First market involved in the trade.
+market_2: Second market involved in the trade
+market_1_ask: Ask price from the top of market_1's order book
+market_2_bid: Bid price from the top of market_2's order book
+buy_price: Cost in USD to buy total volume on market_1
+sell_price: Proceeds in USD to sell total volume on market_2
+weighted_buy: The weighted average buy price
+weighted_sell: The weighted average sell price
+volume_btc: Volume of BTC to take full advantage of opportunity. (currently capped at 500 BTC)
+volume_usd: volume_btc * buy_price
+percent: Profit as a percentage of USD volume
+profit: Total profit in USD
+

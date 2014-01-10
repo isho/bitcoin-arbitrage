@@ -36,6 +36,8 @@ nosetests.xml
 
 # dumped data
 *.json
+*.csv
+*.html
 
 # Project
 config.py
