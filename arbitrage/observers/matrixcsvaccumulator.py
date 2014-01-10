@@ -2,7 +2,7 @@
 import csv
 import datetime
 import os
-import logging
+import config
 
 from .observer import Observer
 
@@ -12,13 +12,12 @@ KEY_ORDER = ['timestamp', 'market_1', 'market_2', 'market_1_ask', 'market_2_bid'
 
 
 class MatrixCsvAccumulator(Observer):
-    OUT_DIR = 'matrix/csv/'
 
     def __init__(self):
         self._depths = None
         self._start_time = datetime.datetime.utcnow()
         try:
-            os.mkdir(self.OUT_DIR)
+            os.mkdir(config.csv_directory)
         except OSError:
             pass
         filename = 'arb-opp-%d-%.2d-%.2dT%.2d%.2d%.2d.csv' % (
@@ -29,16 +28,15 @@ class MatrixCsvAccumulator(Observer):
             self._start_time.minute,
             self._start_time.second,
         )
-        self._csv_file = open(self.OUT_DIR + filename, 'w')
+        self._csv_file = open(os.path.join(config.csv_directory, filename), 'w')
         self._csv_writer = csv.DictWriter(self._csv_file, KEY_ORDER)
         self._csv_writer.writeheader()
 
     def begin_opportunity_finder(self, depths):
         self._depths = depths
-        logging.info("Start opp")
 
     def end_opportunity_finder(self):
-        logging.info("End opp")
+        pass
 
     def opportunity(self, profit, volume, buy_price, kask, sell_price, kbid, perc, weighted_buy, weighted_sell):
         self._csv_writer.writerow(
