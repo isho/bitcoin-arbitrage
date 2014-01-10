@@ -19,7 +19,7 @@ class MatrixCsvAccumulator(Observer):
         self._start_time = datetime.datetime.utcnow()
         try:
             os.mkdir(self.OUT_DIR)
-        except FileExistsError:
+        except OSError:
             pass
         filename = 'arb-opp-%d-%.2d-%.2dT%.2d%.2d%.2d.csv' % (
             self._start_time.year,
